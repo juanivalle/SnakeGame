@@ -1,3 +1,4 @@
+const scoreBoard = document.getElementById("scoreBoard");
 const columnas = 40
 const filas = 30
 const lado = 20
@@ -7,6 +8,8 @@ const altoCanvas = filas * lado
 
 let snake
 let comida
+let score = 0
+
 
 let arriba
 let abajo
@@ -51,8 +54,13 @@ function draw() {
     rect(comida.x * lado, comida.y * lado, lado, lado)
     if (snake.position.dist(comida) == 0) {
         snake.tamaño++
+        score++
+        updateScore();
         posicionComida()
 }
+}
+const updateScore = () => {
+    scoreBoard.innerText = score;
 }
 function keyPressed() {
     if (!isLooping()) {
@@ -94,6 +102,7 @@ function posicionComida () {
 }
 function juegoNuevo () {
     snake = new Snake()
+    score = 0
     loop()
 }
 
